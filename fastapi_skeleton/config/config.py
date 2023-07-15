@@ -25,6 +25,6 @@ class Config:
     ALLOW_SITE = ["*"]
     SESSION_SECRET_KEY = config.get_by_key("security", {}).get_by_key("session", {}).get_by_key("secret-key", "")
     BASE_DIR = path.dirname(path.dirname(path.dirname(path.abspath(__file__))))
-    HTML_DIR = BASE_DIR + "/claon_admin/template"
+    HTML_DIR = BASE_DIR + "/fastapi_skeleton/template"
 
     DATABASE_CONFIG: DatabaseConfig = DatabaseConfig()

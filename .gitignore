@@ -7,3 +7,5 @@ venv
 
 poetry.lock
 .pytest_cache
+
+test.db

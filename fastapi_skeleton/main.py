@@ -10,37 +10,38 @@ from fastapi_skeleton.common.error.handler import add_http_exception_handler
 from fastapi_skeleton.common.util.database import db
 from fastapi_skeleton.config.config import Config
 from fastapi_skeleton.container import Container
-from fastapi_skeleton.router import example
+from fastapi_skeleton.router import example, index
 
 nest_asyncio.apply()
 
 
 def create_app() -> FastAPI:
-    claon_app = FastAPI()
+    _app = FastAPI()
 
     """ Define Container """
     container = Container()
-    claon_app.container = container
+    _app.container = container
 
     """ Define Routers """
     api_version = "v1"
     api_prefix = "/api/" + api_version
 
-    claon_app.include_router(example.router, prefix=api_prefix + "/examples")
+    _app.include_router(index.router)
+    _app.include_router(example.router, prefix=api_prefix + "/examples")
 
     """ Define Middleware """
-    claon_app.add_middleware(
+    _app.add_middleware(
         CORSMiddleware,
         allow_origins=["*"],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"]
     )
-    claon_app.add_middleware(SessionMiddleware, secret_key=Config.SESSION_SECRET_KEY)
+    _app.add_middleware(SessionMiddleware, secret_key=Config.SESSION_SECRET_KEY)
 
-    add_http_exception_handler(claon_app)
+    add_http_exception_handler(_app)
 
-    return claon_app
+    return _app
 
 
 app = create_app()
