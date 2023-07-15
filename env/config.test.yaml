@@ -1,0 +1,6 @@
+database:
+  driver: sqlite+aiosqlite
+  name: test.db
+
+orm:
+  ddl-auto: create
