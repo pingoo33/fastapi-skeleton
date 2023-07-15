@@ -7,9 +7,9 @@ class ExampleResponse(BaseModel):
     id: int
     name: str
 
-    @staticmethod
-    def from_entity(entity: Example):
-        return ExampleResponse(
+    @classmethod
+    def from_entity(cls, entity: Example):
+        return cls(
             id=entity.id,
             name=entity.name
         )
