@@ -15,9 +15,9 @@ async def log_reader(log_file_name: str, n=5):
     with open(f"{Config.BASE_DIR}/{log_file_name}", "r", encoding="utf-8") as file:
         for line in file.readlines()[-n:]:
             if "ERROR" in line:
-                log_lines += f'<span class="text-red-400">{line}</span><br/>'
+                log_lines += f'<p class="text-red-400">{line}</p><br/>'
             elif "WARNING" in line:
-                log_lines += f'<span class="text-orange-300">{line}</span><br/>'
+                log_lines += f'<p class="text-orange-300">{line}</p><br/>'
             else:
                 log_lines += f"{line}<br/>"
         return log_lines
@@ -30,7 +30,7 @@ async def websocket_endpoint_log(websocket: WebSocket):
     try:
         while True:
             await asyncio.sleep(0.1)
-            logs = await log_reader("logs/info.log", 30)
+            logs = await log_reader("logs/info.log", 50)
             await websocket.send_text(logs)
     except Exception as e:
         print(e)

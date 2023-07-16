@@ -8,15 +8,20 @@
 
 <body class="dark:bg-gray-900">
 <div class="flex items-center py-2 px-3">
-    <h1 id="domain" class="text-3xl text-slate-300">{{ context.domain }}</h1><br/>
-    <h1 class="text-3xl text-slate-300">Streaming Log Viewer over WebSockets</h1>
-</div>
-<br/>
-
-<div class="flex items-center py-2 px-3">
-    <h2 class="text-2xl text-slate-400 overline decoration-4 decoration-pink-500">
-        {{context.log_file}}
+    <h2 class="text-2xl text-slate-300">
+        Streaming Log Viewer over WebSockets
     </h2>
+</div>
+
+<div class="flex flex-row items-center py-2 px-3">
+    <div class="flex items-center py-2 px-3">
+        <h2 id="domain" class="text-2xl text-slate-400 overline decoration-4 decoration-red-500">{{ context.domain }}</h2>
+    </div>
+    <div class="flex items-center py-2 px-3">
+        <h2 class="text-2xl text-slate-400 overline decoration-4 decoration-pink-500">
+            {{ context.log_file }}
+        </h2>
+    </div>
 </div>
 
 <div class="flex items-center py-2 px-3">
