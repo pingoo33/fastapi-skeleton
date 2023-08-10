@@ -36,7 +36,7 @@ try:
 
     with open(conf_file_name, encoding="utf-8") as file:
         config_dict = yaml.load(file, Loader=yaml.FullLoader)
-        print(config_dict)
+
         if len(config_dict.get("include", {}).get("optional", [])) > 0:
             for include_file in config_dict.get("include", {}).get("optional", []):
                 try:
