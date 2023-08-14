@@ -7,6 +7,9 @@ class ErrorCode(Enum):
 
     # 401 Unauthorized Error
     NOT_ACCESSIBLE = 40100
+    USER_DOES_NOT_EXIST = 40101
+    INVALID_JWT = 40102
+    EXPIRED_JWT = 40103
 
     # 404 Not Found Error
     DATA_DOES_NOT_EXIST = 40400

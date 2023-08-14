@@ -8,3 +8,18 @@ database:
 
 orm:
   ddl-auto: none
+
+security:
+  jwt:
+    algorithm: HS256
+    secret-key: jwt-secret-key
+    expire:
+      access: 43200
+      refresh: 129600
+  session:
+    secret-key: session-secret-key
+
+redis:
+  enable: true
+  host: localhost
+  port: 6379

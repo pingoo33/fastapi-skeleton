@@ -3,6 +3,7 @@ from dependency_injector import containers, providers
 from fastapi_skeleton import router
 from fastapi_skeleton.common import util
 from fastapi_skeleton.repository.example import ExampleRepository
+from fastapi_skeleton.repository.user import UserRepository
 from fastapi_skeleton.service.example import ExampleService
 
 
@@ -11,6 +12,7 @@ class Container(containers.DeclarativeContainer):
 
     """ Repository """
     example_repository = providers.Singleton(ExampleRepository)
+    user_repository = providers.Singleton(UserRepository)
 
     """ Service """
     example_service = providers.Singleton(ExampleService,

@@ -8,7 +8,7 @@ from starlette.middleware.sessions import SessionMiddleware
 
 from fastapi_skeleton.common.error.handler import add_http_exception_handler
 from fastapi_skeleton.common.util.database import db
-from fastapi_skeleton.config.config import Config
+from fastapi_skeleton.config.env import config
 from fastapi_skeleton.container import Container
 from fastapi_skeleton.router import example, index
 
@@ -37,7 +37,7 @@ def create_app() -> FastAPI:
         allow_methods=["*"],
         allow_headers=["*"]
     )
-    _app.add_middleware(SessionMiddleware, secret_key=Config.SESSION_SECRET_KEY)
+    _app.add_middleware(SessionMiddleware, secret_key=config.get("security.session.secret-key"))
 
     add_http_exception_handler(_app)
 
