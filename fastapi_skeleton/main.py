@@ -10,7 +10,7 @@ from fastapi_skeleton.common.error.handler import add_http_exception_handler
 from fastapi_skeleton.common.util.database import db
 from fastapi_skeleton.config.env import config
 from fastapi_skeleton.container import Container
-from fastapi_skeleton.router import example, index
+from fastapi_skeleton.router import example, index, auth
 
 nest_asyncio.apply()
 
@@ -28,6 +28,7 @@ def create_app() -> FastAPI:
 
     _app.include_router(index.router)
     _app.include_router(example.router, prefix=api_prefix + "/examples")
+    _app.include_router(auth.router, prefix=api_prefix + "/auth")
 
     """ Define Middleware """
     _app.add_middleware(

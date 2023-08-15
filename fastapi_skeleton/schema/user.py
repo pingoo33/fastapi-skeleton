@@ -18,7 +18,7 @@ class User(Base):
         self.pw = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 
     def check_password(self, password: str):
-        return bcrypt.checkpw(self.pw.encode('utf-8'), password.encode('utf-8'))
+        return bcrypt.checkpw(password.encode('utf-8'), self.pw.encode('utf-8'))
 
     def sign_up(self, user_id: str, password: str):
         self.user_id = user_id

@@ -13,7 +13,7 @@ JWT_ALGORITHM = config.get("security.jwt.algorithm")
 JWT_SECRET_KEY = config.get("security.jwt.secret-key")
 
 
-def create_access_token(user_id: str) -> str:
+def create_access_token(user_id: int) -> str:
     to_encode = {
         "sub": user_id,
         "exp": datetime.now(TIME_ZONE_KST) + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
@@ -22,7 +22,7 @@ def create_access_token(user_id: str) -> str:
     return jwt.encode(to_encode, JWT_SECRET_KEY, JWT_ALGORITHM)
 
 
-def create_refresh_key(user_id: str) -> str:
+def create_refresh_key(user_id: int) -> str:
     refresh_key = str(uuid.uuid4())
     save_refresh_key(refresh_key=refresh_key, user_id=user_id)
     return refresh_key

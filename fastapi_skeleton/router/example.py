@@ -22,7 +22,6 @@ class ExampleRouter:
                        example_id: int):
         return await self.example_service.find_by_id(example_id)
 
-
     @router.post('/', response_model=ExampleResponse)
     async def upload(self,
                      req: ExampleRequest):

@@ -15,6 +15,6 @@ def delete_refresh_key(refresh_key: str):
             conn.delete(refresh_key)
 
 
-def find_user_id_by_refresh_key(refresh_key: str) -> int | None:
+def find_user_id_by_refresh_key(refresh_key: str):
     with redis.get_connection() as conn:
-        return conn.get(refresh_key)
+        return int(conn.get(refresh_key))

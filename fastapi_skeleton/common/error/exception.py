@@ -10,6 +10,7 @@ class ErrorCode(Enum):
     USER_DOES_NOT_EXIST = 40101
     INVALID_JWT = 40102
     EXPIRED_JWT = 40103
+    INVALID_PASSWORD = 40104
 
     # 404 Not Found Error
     DATA_DOES_NOT_EXIST = 40400

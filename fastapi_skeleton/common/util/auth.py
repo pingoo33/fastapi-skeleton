@@ -3,19 +3,14 @@ from typing import Annotated
 from dependency_injector.wiring import Provide, inject
 from fastapi import Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
-from pydantic import BaseModel
 
 from fastapi_skeleton.common.error.exception import UnauthorizedException, ErrorCode
 from fastapi_skeleton.common.util.database import db
 from fastapi_skeleton.common.util.jwt import resolve_access_token
-from fastapi_skeleton.common.util.redis import find_user_id_by_refresh_key
+from fastapi_skeleton.common.util.redis import find_user_id_by_refresh_key, delete_refresh_key, save_refresh_key
 from fastapi_skeleton.container import Container
+from fastapi_skeleton.model.request.auth import Subject
 from fastapi_skeleton.repository.user import UserRepository
-
-
-class AuthenticationPrincipal(BaseModel):
-    id: int
-    user_id: str
 
 
 @inject
@@ -39,7 +34,7 @@ async def get_subject(token: HTTPAuthorizationCredentials):
 
     user = await __find_user_by_id(user_id=payload.get("sub"))
 
-    return AuthenticationPrincipal(
+    return Subject(
         id=user.id,
         user_id=user.user_id
     )
@@ -61,7 +56,7 @@ async def get_refresh(refresh_key: HTTPAuthorizationCredentials = Depends(HTTPBe
     delete_refresh_key(refresh_key=refresh_key)
     save_refresh_key(refresh_key=refresh_key, user_id=user_id)
 
-    return AuthenticationPrincipal(
+    return Subject(
         id=user.id,
         user_id=user.user_id
     )
@@ -73,5 +68,5 @@ async def get_user(
     return await get_subject(token)
 
 
-RequestUser = Annotated[AuthenticationPrincipal, Depends(get_user)]
-ReissuedUser = Annotated[AuthenticationPrincipal, Depends(get_refresh)]
+RequestUser = Annotated[Subject, Depends(get_user)]
+ReissuedUser = Annotated[Subject, Depends(get_refresh)]

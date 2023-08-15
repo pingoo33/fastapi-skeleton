@@ -5,6 +5,7 @@ from fastapi_skeleton.common import util
 from fastapi_skeleton.repository.example import ExampleRepository
 from fastapi_skeleton.repository.user import UserRepository
 from fastapi_skeleton.service.example import ExampleService
+from fastapi_skeleton.service.user import UserService
 
 
 class Container(containers.DeclarativeContainer):
@@ -17,3 +18,5 @@ class Container(containers.DeclarativeContainer):
     """ Service """
     example_service = providers.Singleton(ExampleService,
                                           example_repository=example_repository)
+    user_service = providers.Singleton(UserService,
+                                       user_repository=user_repository)
