@@ -11,6 +11,16 @@ class SignInRequest(BaseModel):
     password: str
 
 
+class SocialSignInRequest(BaseModel):
+    id_token: str
+
+
 class SignUpRequest(BaseModel):
+    user_id: str
+    password: str
+
+
+class SocialSignUpRequest(BaseModel):
+    id_token: str
     user_id: str
     password: str

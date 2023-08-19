@@ -18,6 +18,13 @@ security:
       refresh: 129600
   session:
     secret-key: session-secret-key
+  oauth:
+    google:
+      client-id: google-client-id
+    kakao:
+      client-id: kakao-client-id
+      client-secret: kakao-client-secret
+      redirect-uri: kakao-redirect-uri
 
 redis:
   enable: true

@@ -7,6 +7,7 @@ from fastapi_skeleton.common.util.database import Base
 class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(String(length=100), unique=True)
+    oauth_id = Column(String(length=100), unique=True)
     pw = Column(String(length=100))
 
     @property

@@ -2,6 +2,7 @@ from dependency_injector.wiring import inject, Provide
 from fastapi import APIRouter, Depends
 from fastapi_utils.cbv import cbv
 
+from fastapi_skeleton.common.enum import OAuthProvider
 from fastapi_skeleton.common.util.auth import ReissuedUser
 from fastapi_skeleton.container import Container
 from fastapi_skeleton.model.request.auth import SignInRequest, SignUpRequest
@@ -22,9 +23,17 @@ class AuthRouter:
     async def sign_in(self, req: SignInRequest):
         return await self.user_service.sign_in(req)
 
+    @router.post('/{provider}/sign-in', response_model=JwtResponse)
+    async def sign_in_with_provider(self, provider: OAuthProvider, req: SignInRequest):
+        return await self.user_service.social_sign_in(provider, req)
+
     @router.post('/sign-up', response_model=JwtResponse)
     async def sign_up(self, req: SignUpRequest):
         return await self.user_service.sign_up(req)
+
+    @router.post('/{provider}/sign-up', response_model=JwtResponse)
+    async def sign_up_with_provider(self, provider: OAuthProvider, req: SignUpRequest):
+        return await self.user_service.social_sign_up(provider, req)
 
     @router.post('/reissue', response_model=JwtReissueResponse)
     async def reissue_token(self, user: ReissuedUser):
