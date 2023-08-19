@@ -2,7 +2,13 @@
 [![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)](https://www.python.org/downloads/release/python-31010/)
 [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 
-
+## Branch
+### develop
+FastAPI skeleton to start project faster
+### auth
+FastAPI skeleton for authentication using jwt
+### oauth2
+FastAPI skeleton for oauth2 authentication using jwt
 ## Installation
 
 upload image to docker for local environment
